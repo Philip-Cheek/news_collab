@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+  </head>
+  <body>
+  	<div id = "head">
+      <div id = "subhead">
+        <h1>The Local Rag</h1>
+        <form action = '/new'method = "post">
+          <a href = "/new">Become an Editor</a>
+        <form action = "/login" method = "post">
+          Email: <input type = "text" name = "email">
+          Password: <input type = "text" name = "pword"> 
+        </form>
+      </div>
+  	
+    <div id = "regwrap">
+      <div id = "regbox">
+        <form action = "/login" method = "post">
+          <p>Email Address:</p>
+          <input type = "text" name = "email">
+          <p>Password:</p>
+          <input type = "text" name = "pword">
+          <button type = "submit">Submit!</button>
+        </form> 
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div id = "error">
+            <h2>Error<h2>
+              <ul>
+                {% for message in messages %}
+                  <li>{{message}}</li>
+                {% endfor %}
+              </ul>
+          </div>
+        {% endif %}
+      {% endwith %}
+  	</div>
+
+    <p class = "bottom">Not an editor, yet? <a href = "/new"><b>Sign Up>!</b></a></p>
+  </body>

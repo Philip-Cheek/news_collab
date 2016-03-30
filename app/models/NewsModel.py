@@ -75,9 +75,9 @@ class NewsModel(Model):
         if len(check) < 1:
             errors.append('We are sorry. We cannot locate your city in our database.')
         else: 
-            paper_query = "SELECT papers.id FROM cities JOIN papers on papers.id = cities.id WHERE cities.name = %s"
+            paper_query = "SELECT papers.id as paper_id, cities.id as city_id FROM cities JOIN papers on papers.city_id = cities.id WHERE cities.name = %s"
             data = [info['city']]
-            paper_id = self.db.query_db(query, data)
+            paper_city = self.db.query_db(query, data)
 
             if len(paper_id) < 1:
                 title = "The " + info['name']
@@ -93,9 +93,10 @@ class NewsModel(Model):
                 i_data = [title, style, info['id']]
                 self.db.query_db(i_query, i_data)
 
-                paper_id = self.db.query_db(query, data)
+                paper_city = self.db.query_db(query, data)
             
-            p_id = paper_id[0]
+            p_id = paper_city['paper_id']
+            city_id = paper_city['city_id']
 
         if not info['password']:
             errors.append('Password left blank.')
@@ -119,7 +120,20 @@ class NewsModel(Model):
            
                  
             users = self.db.query_db(g_query)
-            return {"status": True, "user": users[0]}
+            return {"status": True, "user": users[0], "city_id": city_id}
+
+    def log_user(self, info):
+        password = info['password']
+
+        g_query = "SELECT * FROM users WHERE email = %s"
+        data = [info['email']]
+        users = self.db.query_db(g_query, data)
+
+        if len(users) > 0:
+            if self.bcrypt.check_password_hash(users[0]['password'], password):
+                return {"status": True, "user": users[0]}
+
+        return {"status": False}
 
     def city_paper(self, info):
         data = [info['name']]

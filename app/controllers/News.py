@@ -11,8 +11,7 @@ class News(Controller):
         return self.load_view('index.html')
 
     def search(self):
-        info = {'name': request.form['search']}
-        print info 
+        info = {'name': request.form['search']} 
         result = self.models['NewsModel'].search(info)
         if result["results"] == True:
             if len(result["cities"]) < 1:
@@ -38,6 +37,52 @@ class News(Controller):
 
     def new(self):
         return self.load_view("new.html")
+
+    def create(self):
+        data = {
+            "email": request.form['email'],
+            "first_name": request.form['first_name'],
+            "last-name": request.form['last_name'],
+            "city": request.form['city']
+        }
+
+        reg = self.models['NewsModel'].create_user(data)
+
+        if reg['status'] == False:
+            for error in errors:
+                flash(error)
+            return redirect('/new')
+
+        session['user_id'] = reg['user']['id']
+        session['user_paper'] = reg['user']['paper_id']
+        session['name'] = reg['user']['first_name'] + " " + reg['user']['last_name']
+
+        return redirect("/paper/" + str(reg['city_id']) +"/dashboard/" + str(session[user_id]))
+
+    def login(self):
+        data = {
+            "email": request.form['email']
+            "password:" request.form['pword']
+        }
+
+        log = self.models['NewsModel'].log_user
+
+        if log['status'] == False:
+            flash("Incorrect information.")
+            return redirect('/log_page')
+
+        session['user_id'] = log['user']['id']
+        session['user_paper'] = log['user']['paper_id']
+        session['name'] = log['user']['first_name'] + " " + log['user']['last_name']
+
+        return redirect("/" + str(log['user']['city_id']) + "/dashboard/" + str(session[user_id]))
+
+    def log_page(self):
+        return self.load_view("log_page.html")
+
+
+
+
 
 
 '''
