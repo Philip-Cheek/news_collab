@@ -7,6 +7,7 @@ routes['default_controller'] = 'News'
 routes['POST']['/search'] = 'News#search'
 routes['/results'] = 'News#results'
 routes['/paper/<id>'] = 'News#city_page'
+routes['/new'] = 'News#city_page'
 
     
     #routes['PUT']['/users/<int:id>'] = 'users#update'
