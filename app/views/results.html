@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+    <meta charset = "UTF-8"
+  </head>
+  <body>
+  	<div id = "head">
+      <div id = "subhead">
+        <h1>The Local Rag</h1>
+        <p>Become an Editor<p>
+        <form action = "/register" method = "post">
+          <button>Sign up</button> 
+        </form> 
+      </div>
+      <div id = "sbar">
+        <form action = "/search" method = "post">
+          Find Your City: <input type = "text" name = "search"> 
+        </form> 
+      </div>
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div id = "error">
+            <h2>Error<h2>
+              <ul>
+                {% for message in messages %}
+                  <li>{{message}}</li>
+                {% endfor %}
+              </ul>
+          </div>
+        {% endif %}
+      {% endwith %}
+
+    <div id = "s_res">
+      {%if results%}
+    	  {%for x in results%}
+          <a href = "/paper/{{x['id']}}">{{x['name']}}</a>
+        {%endfor%}
+      {%endif%}
+    </div>

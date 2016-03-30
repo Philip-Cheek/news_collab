@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+  </head>
+  <body>
+  	<div id = "head">
+      <h5>Phil's CRUDd<h5>
+      <a href = "/dashboard/admin">Dashboard<p>
+      <a href = "/signin">profile</a>
+      <form action = "/signout" method = post>
+      	<button>singout</button>
+      </form> 
+    </div>
+
+    <div id = "line">
+    	<h2>Add a new user</h2>
+    	<a href = "/dashboard/admin"><button>Return to Dashboard</button></a>
+    </div> 
+
+    <div id = "add">
+    	<form action = "/add" method= "post">
+    		<p>Email Address:</p>
+    		<input type = "text" name = "email">
+    		<p>First Name</p>
+    		<input type = "text" name = "fname">
+    		<p>Last Name:</p>
+    		<input type = "text" name = "lname">
+    		<p>Password:</p>
+    		<input type = "text" name = "pword">
+    		<p>Confirm Password</p>
+    		<input type = "text" name = "cword">
+        <button type = "submit">Add!</button>
+    	</form>
+    </div>
+
+
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div id = "error">
+            <h2>Error<h2>
+              <ul>
+                {% for message in messages %}
+                  <li>{{message}}</li>
+                {% endfor %}
+              </ul>
+          </div>
+        {% endif %}
+      {% endwith %}
+  	</div>

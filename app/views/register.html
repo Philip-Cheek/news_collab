@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+  </head>
+  <body>
+  	<div id = "head">
+      <h5>Phil's CRUDd</h5>
+      <a href = "/">Home</a>
+      <a href = "/signin">Sign in</a>
+    </div>
+  	
+    <div id = "regwrap">
+      <div id = "regbox">
+        <form action = "/registering" method = "post">
+          <p>Email Address:</p>
+          <input type = "text" name = "email">
+          <p>First Name:</p>
+          <input type = "text" name = "fname">
+          <p>Last Name:</p>
+          <input type = "text" name = "lname">
+          <p>Password:</p>
+          <input type = "text" name = "pword">
+          <p>Confirm Password:</p>
+          <input type = "text" name = "cword"> 
+          <button type = "submit">Register!</button>
+        </form> 
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div id = "error">
+            <h2>Error<h2>
+              <ul>
+                {% for message in messages %}
+                  <li>{{message}}</li>
+                {% endfor %}
+              </ul>
+          </div>
+        {% endif %}
+      {% endwith %}
+  	</div>
+
+    <a href = "/signin" class = "bottom">Already have an account? <b>Sign in!</b></a>
+

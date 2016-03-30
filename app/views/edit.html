@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+  </head>
+  <body>
+  	<div id = "head">
+      <h5>Phil's CRUDd<h5>
+      <a href = "/dashboard/admin">Dashboard<p>
+      <a href = "/users/{{session['id']}}">profile</a>
+      <form action = "/signout" method = post>
+      	<button>singout</button>
+      </form> 
+    </div>
+    <div id = "sub">
+      <h3>Edit User #{{user['id']}}</h3>
+      <button><a href = "/dashboard/admin">Return to Dashboard</a></button>
+    </div>
+
+    <div id = "edinfo">
+      <p class = "top">Edit Information</p>
+      <form action = '/edit_user_info' method = "post">
+        <p>Email Address:</p>
+        <input type = "text" name = "email" value = "{{user['email']}}">
+        <p>First Name:</p>
+        <input type = "text" name = "first_name" value = "{{user['first_name']}}">
+        <p>Last Name:</p>
+        <input type = "text" name = "last_name" value = "{{user['last_name']}}">
+        <p>User Level:</p>
+        <select name = "user_level">
+          <option value = "user">User</option>
+          <option value = "admin">Admin</option> 
+        </select>
+        <input type = "hidden" name = "id" value = "{{user['id']}}">
+        <button type = "submit">Save</button> 
+      </form> 
+    </div>
+
+    <div id = "editpw">
+      <p class = "top">Change Password</p>
+      <form action = '/edit_user_pw' method = "post">
+        <p>Password:</p>
+        <input type = "text"> 
+        <p>Password Convirmation</p>
+        <input type = "text">
+        <button tyep = "submit">Update Password</button>
+      </form> 
+
+
