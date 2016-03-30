@@ -8,6 +8,10 @@ routes['POST']['/search'] = 'News#search'
 routes['/results'] = 'News#results'
 routes['/paper/<id>'] = 'News#city_page'
 routes['/new'] = 'News#city_page'
+routes['POST']['/create'] = 'News#create'
+routes['POST']['/login'] = 'News#login'
+routes['/log_page'] = 'News#log_page'
+
 
     
     #routes['PUT']['/users/<int:id>'] = 'users#update'
