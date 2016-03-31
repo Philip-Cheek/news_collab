@@ -50,7 +50,7 @@ class News(Controller):
             "first_name": request.form['fname'],
             "last_name": request.form['lname'],
             "city": request.form['city'],
-            "zipcode": request.form['zipcode']
+            "zipcode": request.form['zipcode'],
             "dob": request.form['dob'],
             "password": request.form['pword'],
             "pw_confirm": request.form['cword']
@@ -94,10 +94,11 @@ class News(Controller):
 
     def dashboard(self, double_id):
         info = double_id.split('_')
-        data = {
-            "city_id": info[0],
-            "user_id": info[1]
-        }
+        data = {"id": info[0]}
+
+        return self.load_view("")
+        
+
 
         print data
         return self.load_view('register.html')

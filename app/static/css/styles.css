@@ -1,9 +1,62 @@
 * {
-  font-family: monaco;
-  padding:1em;
+  padding:0;
   margin:0;
+  font-family: 'Italiana', serif;
 }
 
+
+
+#head{
+	text-align: center;
+	width:100%;
+	padding:.2em;
+	border
+	position:relative;
+}
+
+#subhead{
+	position: relative;
+	width:100%;
+}
+
+#subhead #login_bar{
+	position: absolute;
+	top: 1em;
+	right: 9em;
+
+}
+
+#subhead a.login {
+	color:lightgray;
+	font-size: 1.3em;
+	position: absolute;
+	top: 1em;
+	right:14.1em;
+
+}
+
+button.arrow{
+	top: .58em;
+	right: 4.2em;
+	position: absolute;
+	font-size:1.7em;
+	color:lightgray;
+	background-color: white;
+	border:none;
+	cursor: pointer;
+}
+
+#subhead h1{
+	margin-top: .8em;
+	display:inline-block;
+}
+#subhead h1 a{
+	font-family: 'Italiana', serif;
+	font-weight:normal;
+	color: black;
+	text-decoration: none;
+	font-size:2.2em;
+}
 textarea{
 	resize:none;
 }

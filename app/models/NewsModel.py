@@ -25,9 +25,9 @@ class NewsModel(Model):
                 
     def get_all_articles_auth(self, info):
         query = "SELECT *,aricles.id as article_id, users.id as orig_user_id FROM articles JOIN users ON articles.author_id = users.id JOIN WHERE articles.paper_id = %s"
-        data = [info['paper_id']
+        data = [info['paper_id']]
         return self.db.query_db(query, data)
-        
+
     def get_city(self, info):
         query = "SELECT * FROM cities WHERE id = %s"
         data = [info['id']]
