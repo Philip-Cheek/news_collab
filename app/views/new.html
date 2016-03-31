@@ -5,7 +5,7 @@
   <body>
   	<div id = "head">
       <div id = "subhead">
-        <h1>The Local Rag</h1>
+        <h1><a href = "/">The Local Rag</a></h1>
         <form action = '/new'method = "post">
           <a href = "/new">Become an Editor</a>
         </form>
@@ -19,10 +19,10 @@
     <div id = "copy">
       <!--This content is temporary. I can't think of any compelling copy but realize a blank sign up page probably isn't great!-->
       <ul>Become an editor and
-        <li>Share your observations and interests</li>
+        <li>share your observations and interests</li>
         <li>and thoughts</li>
         <li>and insights</li>
-        <li>about the city in which you live</li>
+        <li>about the city in which you live.</li>
       </ul>
     </div>
 
@@ -34,20 +34,21 @@
     		<input type = "text" name = "fname">
     		<p>Last Name:</p>
     		<input type = "text" name = "lname">
-        <p>City</P>
-        <input type = "text" name = "lname">
-        <p>Date of Birth</p>
+        <p>Your City:</P>
+        <input type = "text" name = "city">
+        <p>Your Zip Code:</P>
+        <input type = "text" name = "zipcode">
+        <p>Date of Birth:</p>
         <input type = "date" name = "dob">
     		<p>Password:</p>
     		<input type = "text" name = "pword">
-    		<p>Confirm Password</p>
+    		<p>Confirm Password:</p>
     		<input type = "text" name = "cword">
 
         <div id = "question">
-          <h6>Provide a brief description of what you hope to add to the editorial content of this site</h6>
-          <textarea></textarea>
+          <h6>Provide a brief description of what you hope to contribute in regard to the editorial content of this site</h6>
+          <textarea name = "quetion"></textarea>
         </div>
-
         <button type = "submit">Add!</button>
     	</form>
     </div>

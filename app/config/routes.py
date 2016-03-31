@@ -7,10 +7,11 @@ routes['default_controller'] = 'News'
 routes['POST']['/search'] = 'News#search'
 routes['/results'] = 'News#results'
 routes['/paper/<id>'] = 'News#city_page'
-routes['/new'] = 'News#city_page'
+routes['/new'] = 'News#new'
 routes['POST']['/create'] = 'News#create'
 routes['POST']['/login'] = 'News#login'
 routes['/log_page'] = 'News#log_page'
+routes['/dashboard/<double_id>'] = 'News#dashboard'
 
 
     
