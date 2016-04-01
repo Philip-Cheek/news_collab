@@ -132,15 +132,16 @@ class NewsModel(Model):
             return {"status": True, "user": users[0], "city_id": city_id}
 
     def upload_image(self,info):
-        UPLOAD_FOLDER = '/static/'
-        allowed = ["jpg", "png", "jpeg", "gif"]
-        photo = request.files['file']
-        test = photo.split('.')
-        if test[1] not in allowed:
-            return {'status': False}
+        if not info['image']:
+            data = ['/static/ + default.png']
+        else:
+            info['image'].save(os.path.join('/static/'), info['image'].filename)
+            data = ['/static/' + info['image'].filename]
 
+        query = "INSERT INTO users (url) VALUES (%s)"
+        self.db.query_db(query, data)
 
-
+        return data[0]
 
     def log_user(self, info):
         password = info['password']

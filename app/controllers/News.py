@@ -24,6 +24,7 @@ class News(Controller):
         return redirect('/paper/' + str(result["city"]['id']))
 
     def results(self):
+        print session['results']
         return self.load_view("results.html", results = session['results'])
 
     def city_page(self, id):
@@ -64,10 +65,16 @@ class News(Controller):
             for error in reg['errors']:
                 flash(error)
             return redirect('/new')
-
+        
+        info = {
+            "image": request.files['image']
+        }
+        
+        
         session['user_id'] = reg['user']['user_id']
         session['user_paper'] = reg['user']['paper_id']
         session['name'] = reg['user']['first_name'] + " " + reg['user']['last_name']
+        session['url'] = self.models['NewsModel'].upload_image(info)
 
         return redirect("/dashboard/" + str(reg['city_id']) + "_" + str(session['user_id']))
 
@@ -86,6 +93,7 @@ class News(Controller):
         session['user_id'] = log['user']['id']
         session['user_paper'] = log['user']['paper_id']
         session['name'] = log['user']['first_name'] + " " + log['user']['last_name']
+        session['url'] = log['user']['url']
 
         return redirect("/dashboard/" + str(log['user']['city_id']) + "_" + str(session['user_id']))
 
