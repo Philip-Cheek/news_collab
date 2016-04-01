@@ -1,6 +1,8 @@
 from system.core.model import Model
-import re
-import random 
+from werkzeug import secure_filename
+import random
+import time
+import os 
 
 class NewsModel(Model):
     def __init__(self):
@@ -128,6 +130,17 @@ class NewsModel(Model):
             print users
             users = self.db.query_db(g_query)
             return {"status": True, "user": users[0], "city_id": city_id}
+
+    def upload_image(self,info):
+        UPLOAD_FOLDER = '/static/'
+        allowed = ["jpg", "png", "jpeg", "gif"]
+        photo = request.files['file']
+        test = photo.split('.')
+        if test[1] not in allowed:
+            return {'status': False}
+
+
+
 
     def log_user(self, info):
         password = info['password']

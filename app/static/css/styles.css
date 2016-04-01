@@ -16,13 +16,15 @@
 
 #subhead{
 	position: relative;
-	width:100%;
+	max-width:70em;
+	min-width:55em;
+	margin: 0 auto;
 }
 
 #subhead #login_bar{
 	position: absolute;
 	top: 1em;
-	right: 9em;
+	right: 2.2em;
 
 }
 
@@ -31,13 +33,15 @@
 	font-size: 1.3em;
 	position: absolute;
 	top: 1em;
-	right:14.1em;
+	right:8.4em;
 
 }
 
+
+
 button.arrow{
 	top: .58em;
-	right: 4.2em;
+	right: 0em;
 	position: absolute;
 	font-size:1.7em;
 	color:lightgray;
@@ -50,6 +54,11 @@ button.arrow{
 	margin-top: .8em;
 	display:inline-block;
 }
+
+.login a{
+	text-decoration: none;
+}
+
 #subhead h1 a{
 	font-family: 'Italiana', serif;
 	font-weight:normal;
