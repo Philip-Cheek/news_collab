@@ -88,7 +88,7 @@ class News(Controller):
         
         session['url'] = info['url']
         print session['url']
-
+        self.models['NewsModel'].upload_image
 
         return redirect("/dashboard/" + str(reg['city_id']) + "_" + str(session['user_id']))
 
@@ -120,16 +120,16 @@ class News(Controller):
         data = {"id": info[0]}
         paper = self.models['NewsModel'].render_paper(data)
 
-        data = {"id": session['id']}
-        user = self.modeld['NewsModel'].get_user(data)
+        data = {"id": session['user_id']}
+        user = self.models['NewsModel'].get_user(data)
 
-        data = {"id": paper['id']}
+        data = {"paper_id": paper['id']}
         articles = self.models['NewsModel'].get_articles(data)
 
 
 
         
-        return self.load_view('dashboard.html')
+        return self.load_view('dashboard.html', user = user)
 
 
 

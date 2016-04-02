@@ -122,8 +122,8 @@ class NewsModel(Model):
             password = info['password']
 
             pw_hash = self.bcrypt.generate_password_hash(password)
-            i_query = "INSERT INTO users (first_name, last_name, email, dob, paper_id, created_at, password) VALUES (%s, %s, %s, %s, %s, NOW(), %s)"
-            i_data = [info['first_name'], info['last_name'], info['email'], info['dob'], p_id, pw_hash]
+            i_query = "INSERT INTO users (first_name, last_name, email, dob, paper_id, zip_code, created_at, password) VALUES (%s, %s, %s, %s, %s, NOW(), %s)"
+            i_data = [info['first_name'], info['last_name'], info['email'], info['dob'], info['zip_code'], p_id, pw_hash]
             self.db.query_db(i_query, i_data)
             
             g_query = "SELECT *,users.id as user_id FROM users JOIN papers on users.paper_id = papers.id ORDER BY users.id DESC LIMIT 1"
