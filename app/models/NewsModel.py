@@ -3,6 +3,7 @@ from werkzeug import secure_filename
 import random
 import time
 import os 
+import re
 
 class NewsModel(Model):
     def __init__(self):
@@ -72,7 +73,7 @@ class NewsModel(Model):
         if not info['email']:
             errors.append('Email field may not be left blank.')
         elif not EMAIL_REGEX.match(info['email']):
-            error.append('Submitted email is not valid.')
+            errors.append('Submitted email is not valid.')
 
         data = [info['city']]
         query = "SELECT * FROM cities where name = %s"
@@ -101,7 +102,8 @@ class NewsModel(Model):
                 i_data = [title, style, check[0]['id']]
                 self.db.query_db(i_query, i_data)
 
-                paper_city = self.db.query_db(query, data)
+                paper_city = self.db.query_db(paper_query, data)
+                print paper_city 
 
             print paper_city
             p_id = paper_city[0]['paper_id']
@@ -126,16 +128,19 @@ class NewsModel(Model):
             
             g_query = "SELECT *,users.id as user_id FROM users JOIN papers on users.paper_id = papers.id ORDER BY users.id DESC LIMIT 1"
             users = self.db.query_db(g_query)
-            print "watch below"
-            print users
             users = self.db.query_db(g_query)
             return {"status": True, "user": users[0], "city_id": city_id}
 
-    def upload_image(self,info):
-        if not info['image']:
+    def upload_image(self,image):
+        if not image:
             data = ['/static/ + default.png']
         else:
-            info['image'].save(os.path.join('/static/'), info['image'].filename)
+            x =  os.path.dirname('/users/philipcheek/Desktop/news_collab/static')
+            print "this"
+            print x 
+            print "why?!"
+            print str(image.filename)
+            image.save(os.path.join(x + '/static'), image.filename)
             data = ['/static/' + info['image'].filename]
 
         query = "INSERT INTO users (url) VALUES (%s)"

@@ -6,15 +6,22 @@
   	<div id = "head">
       <div id = "subhead">
         <h1><a href = "/">The Local Rag</a></h1>
-        <form action = '/new'method = "post">
-          <a href = "/new">Become an Editor</a>
-        </form>
+        <div id = "h_align"> 
+          <form action = '/new'method = "post">
+            <a href = "/new">Become an Editor</a>
+          </form>
+        </div> 
+        <div id = "logbatch">
+          <a href = "/log_page" class = "login">LOGIN</a>
+          <form action = "/login" method = "post">
+            <div id = "login_bar">
+              <input type = "text" name = "email" placeholder="Email"><br>
+              <input type = "text" name = "pword" placeholder="Password"> 
+            </div>
+              <button type = "submit" class = "arrow">&rarr;</button>
+            </form>
+          </div>
       </div>
-      <form action = "/search" method = "post">
-        Find Your City: <input type = "text" name = "search"> 
-        <button type = "submit">Submit!</button> 
-      </form> 
-    </div>
 
     <div id = "copy">
       <!--This content is temporary. I can't think of any compelling copy but realize a blank sign up page probably isn't great!-->
@@ -27,7 +34,7 @@
     </div>
 
     <div id = "create">
-    	<form action = "/create" method= "post">
+    	<form action = "/create" method= "post" enctype="multipart/form-data">
     		<p>Email Address:</p>
     		<input type = "text" name = "email">
     		<p>First Name</p>
@@ -44,6 +51,9 @@
     		<input type = "text" name = "pword">
     		<p>Confirm Password:</p>
     		<input type = "text" name = "cword">
+        <p>Profile Pic</p>
+        <input type="file" name="image" accept="image/*"> 
+        <p>Keep photo 400x400 for the best results!<p> 
 
         <div id = "question">
           <h6>Provide a brief description of what you hope to contribute in regard to the editorial content of this site</h6>

@@ -17,17 +17,17 @@
     <div id = "headlines">
       <div = "leadbox">
         <h2>{{headlines[0][title]}}</h2>
-        <a href = "/users/{{headlines[0][user_name]">{{headlines[0][user_name]}}</a>
+        <a href = "/users/{{headlines[0][user_name]}}">{{headlines[0][user_name]}}</a>
         <img src = "{{headlines[0][img]}}">
         <p>{{headlines[0][abridge]}}</p> 
-        <a class = "readmore" href = "/paper/{{headlines[0]['id']">Read more -></a> 
+        <a class = "readmore" href = "/paper/{{headlines[0]['id']}}">Read more -></a> 
       </div>
-      <p class = "readmore"><a href = "/paper/headhline[0]['id']">
+      <p class = "readmore"><a href = "/paper/headhline[0]['id']}}">
       {%for x in range(1,14)%}
         <div class = "hbottom"> 
-          <img class = "thumb" src = "{{headlines[x][img]"></
+          <img class = "thumb" src = "{{headlines[x][img]}}"></
           <p>{{headlines[x][abridge]}}</p> 
-          <a class = "readmore" href = "/paper/{{headlines[0]['id']">Read more -></a>
+          <a class = "readmore" href = "/paper/{{headlines[0]['id']}}">Read more -></a>
         </div> 
       </div> 
      {%endfor%}

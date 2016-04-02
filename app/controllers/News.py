@@ -1,6 +1,9 @@
 from system.core.controller import *
 from collections import defaultdict
 import time
+import os
+from werkzeug import secure_filename
+
 
 class News(Controller):
     def __init__(self, action):
@@ -66,15 +69,23 @@ class News(Controller):
                 flash(error)
             return redirect('/new')
         
-        info = {
-            "image": request.files['image']
-        }
-        
-        
+       
+        file = request.files['image']
+        print file 
+
         session['user_id'] = reg['user']['user_id']
         session['user_paper'] = reg['user']['paper_id']
         session['name'] = reg['user']['first_name'] + " " + reg['user']['last_name']
-        session['url'] = self.models['NewsModel'].upload_image(info)
+
+        if not file:
+            info = {"url": '/static/default.png'] 
+        else:
+            x = (os.path.dirname('/users/philipcheek/Desktop/news_collab/app/static'))
+            print x 
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(x + "/static", filename))
+            info = {'url': filename}
+        # session['url'] = self.models['NewsModel'].upload_image(image)
 
         return redirect("/dashboard/" + str(reg['city_id']) + "_" + str(session['user_id']))
 
@@ -103,12 +114,7 @@ class News(Controller):
     def dashboard(self, double_id):
         info = double_id.split('_')
         data = {"id": info[0]}
-
-        return self.load_view("")
         
-
-
-        print data
         return self.load_view('register.html')
 
 
