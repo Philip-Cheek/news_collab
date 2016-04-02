@@ -160,6 +160,10 @@ class NewsModel(Model):
 
         return {"status": True, "paper": paper[0]}
 
+    def get_user(self,info):
+        query = "SELECT * FROM users WHERE id = %s"
+        data = [info['id']]
+        
     def get_articles(self, info):
         data = [info['paper_id']]
         query = "SELECT *, articles.id as article_id FROM articles join papers on articles.paper_id = papers.id where papers.id = %s"

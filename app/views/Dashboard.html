@@ -2,7 +2,39 @@
   <head>
     <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
     <meta charset = "UTF-8">
+    <script>
+      $(document).ready(function(){
+        
+        var x = {{user['zip']}}
+
+        $('#divRss').FeedEk({
+          FeedUrl : 'https://news.google.com/news/section?geo=' + x + '&ar=1459384211&output=rss'
+        });
+        
+        var r = Math.floor(Math.random()*256);
+        var g = Math.floor(Math.random()*256);
+        var b = Math.floor(Math.random()*256);
+        
+        $('#example, .itemTitle a').css("color", getHex(r,g,b));
+        
+        $('#example').click(function() {
+        
+            $('.itemTitle a').css("color", getHex(r,g,b));
+
+        });
+        
+        function intToHex(n){
+            n = n.toString(16);
+            if( n.length < 2) 
+                n = "0"+n; 
+            return n;
+        }
+        
+        function getHex(r, g, b){
+            return '#'+intToHex(r)+intToHex(g)+intToHex(b); 
+        }
     
+      });
   </script>
   </head>
   <body>
@@ -46,12 +78,7 @@
       {% endwith %}
 
 
+    <div id="example">The feed</div>
+    <div id="divRss"></div>
 
-    <div id = "s_res">
-      {%if results%}
-    	  {%for x in results%}
-          <a href = "/paper/{{x['id']}}">{{x['name']}}</a>
-        {%endfor%}
-      {%endif%}
-    </div>
-  </body>
+    

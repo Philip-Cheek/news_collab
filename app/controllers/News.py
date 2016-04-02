@@ -80,10 +80,10 @@ class News(Controller):
         if not file:
             info = {"url": '/static/default.png'}
         else:
-            x = (os.path.dirname('/users/philipcheek/Desktop/news_collab/app/static'))
+            x = (os.path.dirname('/users/philipcheek/Desktop/news_collab/app/static/uploads'))
             print x 
             filename = secure_filename(file.filename)
-            file.save(os.path.join(x + "/static", filename))
+            file.save(os.path.join(x + "/uploads", filename))
             info = {'url': '/static/' + filename}
         
         session['url'] = info['url']
@@ -116,9 +116,20 @@ class News(Controller):
 
     def dashboard(self, double_id):
         info = double_id.split('_')
+
         data = {"id": info[0]}
+        paper = self.models['NewsModel'].render_paper(data)
+
+        data = {"id": session['id']}
+        user = self.modeld['NewsModel'].get_user(data)
+
+        data = {"id": paper['id']}
+        articles = self.models['NewsModel'].get_articles(data)
+
+
+
         
-        return self.load_view('register.html')
+        return self.load_view('dashboard.html')
 
 
 
