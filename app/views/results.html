@@ -15,10 +15,8 @@
           Find Your City: <input type = "text" name = "search"> 
         </form> 
       </div>
+      <p>l;aksdfjalsk;dfj</p>
     </div>
-    <p> lskdjfa;dfjas;dlfjs</p>
-    <h1>wherlkwjl;sdf</h1>
-    <img src = "file:///Users/philipcheek/Desktop/news_collab/app/static/search-svg.svg">
     {% with messages = get_flashed_messages() %}
         {% if messages %}
           <div id = "error">
@@ -31,6 +29,8 @@
           </div>
         {% endif %}
       {% endwith %}
+
+    <img src = "{{session['url']}}"
 
     <div id = "s_res">
       {%if results%}

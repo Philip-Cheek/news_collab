@@ -78,14 +78,17 @@ class News(Controller):
         session['name'] = reg['user']['first_name'] + " " + reg['user']['last_name']
 
         if not file:
-            info = {"url": '/static/default.png'] 
+            info = {"url": '/static/default.png'}
         else:
             x = (os.path.dirname('/users/philipcheek/Desktop/news_collab/app/static'))
             print x 
             filename = secure_filename(file.filename)
             file.save(os.path.join(x + "/static", filename))
-            info = {'url': filename}
-        # session['url'] = self.models['NewsModel'].upload_image(image)
+            info = {'url': '/static/' + filename}
+        
+        session['url'] = info['url']
+        print session['url']
+
 
         return redirect("/dashboard/" + str(reg['city_id']) + "_" + str(session['user_id']))
 

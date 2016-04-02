@@ -132,21 +132,10 @@ class NewsModel(Model):
             return {"status": True, "user": users[0], "city_id": city_id}
 
     def upload_image(self,image):
-        if not image:
-            data = ['/static/ + default.png']
-        else:
-            x =  os.path.dirname('/users/philipcheek/Desktop/news_collab/static')
-            print "this"
-            print x 
-            print "why?!"
-            print str(image.filename)
-            image.save(os.path.join(x + '/static'), image.filename)
-            data = ['/static/' + info['image'].filename]
-
         query = "INSERT INTO users (url) VALUES (%s)"
-        self.db.query_db(query, data)
-
-        return data[0]
+        data = [info['url']]
+        url = self.db.query_db(query, data)
+        return None 
 
     def log_user(self, info):
         password = info['password']
