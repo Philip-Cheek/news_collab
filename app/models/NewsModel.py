@@ -168,6 +168,7 @@ class NewsModel(Model):
         data = [info['id']]
         query = "SELECT cities.name as city_name, countries.name as country_name FROM cities JOIN countries on countries.code = cities.country_code WHERE cities.id = %s"
         city = self.db.query_db(query,data)
+        return city[0]
         
     def get_articles(self, info):
         data = [info['paper_id']]
