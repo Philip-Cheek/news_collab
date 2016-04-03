@@ -163,11 +163,17 @@ class NewsModel(Model):
     def get_user(self,info):
         query = "SELECT * FROM users WHERE id = %s"
         data = [info['id']]
+
+    def render_full_city(self, info):
+        data = [info['id']]
+        query = "SELECT cities.name as city_name, countries.name as country_name FROM cities JOIN countries on countries.code = cities.country_code WHERE cities.id = %s"
+        city = self.db.query_db(query,data)
         
     def get_articles(self, info):
         data = [info['paper_id']]
         query = "SELECT *, articles.id as article_id FROM articles join papers on articles.paper_id = papers.id where papers.id = %s"
         articles = self.db.query_db(query,data)
+
 
         if len(articles) < 1:
             return{"status": False, "article_list": None}

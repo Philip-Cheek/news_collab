@@ -27,7 +27,11 @@ class News(Controller):
         return redirect('/paper/' + str(result["city"]['id']))
 
     def results(self):
-        print session['results']
+        results = {}
+        for x in session['results']:
+            city = session['results']
+            results[", ".join([city['city_name'], city['country_name'])] = 
+
         return self.load_view("results.html", results = session['results'])
 
     def city_page(self, id):
