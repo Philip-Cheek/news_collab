@@ -135,12 +135,12 @@ class NewsModel(Model):
         query = "INSERT INTO users (url) VALUES (%s)"
         data = [info['url']]
         url = self.db.query_db(query, data)
-        return None 
+        
 
     def log_user(self, info):
         password = info['password']
 
-        g_query = "SELECT * FROM users JOIN papers on papers.id = users.paper_id WHERE email = %s"
+        g_query = "SELECT *, users.id as user_id FROM users JOIN papers on papers.id = users.paper_id WHERE email = %s"
         data = [info['email']]
         users = self.db.query_db(g_query, data)
 

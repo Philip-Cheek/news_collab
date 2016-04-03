@@ -95,7 +95,7 @@ class News(Controller):
         
         session['url'] = info['url']
         print session['url']
-        self.models['NewsModel'].upload_image
+        self.models['NewsModel'].upload_image(info)
 
         return redirect("/dashboard/" + str(reg['city_id']) + "_" + str(session['user_id']))
 
@@ -105,13 +105,14 @@ class News(Controller):
             "password": request.form['pword']
         }
 
-        log = self.models['NewsModel'].log_user
+        log = self.models['NewsModel'].log_user(data)
 
         if log['status'] == False:
             flash("Incorrect information.")
             return redirect('/log_page')
 
-        session['user_id'] = log['user']['id']
+        print log
+        session['user_id'] = log['user']['user_id']
         session['user_paper'] = log['user']['paper_id']
         session['name'] = log['user']['first_name'] + " " + log['user']['last_name']
         session['url'] = log['user']['url']
@@ -127,6 +128,7 @@ class News(Controller):
         data = {"id": info[0]}
         paper = self.models['NewsModel'].render_paper(data)
 
+        print session['user_id']
         data = {"id": session['user_id']}
         user = self.models['NewsModel'].get_user(data)
         print user
