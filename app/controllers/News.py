@@ -27,12 +27,15 @@ class News(Controller):
         return redirect('/paper/' + str(result["city"]['id']))
 
     def results(self):
+        info = {}
         results = {}
         for x in session['results']:
-            city = session['results']
-            results[", ".join([city['city_name'], city['country_name'])] = 
-
-        return self.load_view("results.html", results = session['results'])
+            info['id'] = x['id']
+            info['name'] = x['name']
+            city = self.models['NewsModel'].render_full_city(info)
+            results[", ".join([city['city_name'], city['country_name']])] = self.models['NewsModel'].render_paper(info)
+            print results
+        return self.load_view("results.html", results = results)
 
     def city_page(self, id):
         data = {"id": id}

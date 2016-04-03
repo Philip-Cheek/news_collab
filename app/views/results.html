@@ -50,8 +50,15 @@
 
     <div id = "s_res">
       {%if results%}
+        <table>
+          <tr>
+            <td>City</td>
+            <td>Paper</td>
+          <tr>
     	  {%for x in results%}
-          <a href = "/paper/{{x['id']}}">{{x['name']}}</a>
+          <tr>
+            <td>{{x}}</td>
+            <td><a href = "/paper/{{x['id']}}">{{results[x]['name']}}</a></td>
         {%endfor%}
       {%endif%}
     </div>
