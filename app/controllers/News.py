@@ -61,7 +61,7 @@ class News(Controller):
             "first_name": request.form['fname'],
             "last_name": request.form['lname'],
             "city": request.form['city'],
-            "zipcode": request.form['zipcode'],
+            "zip_code": request.form['zipcode'],
             "dob": request.form['dob'],
             "password": request.form['pword'],
             "pw_confirm": request.form['cword']
@@ -129,6 +129,7 @@ class News(Controller):
 
         data = {"id": session['user_id']}
         user = self.models['NewsModel'].get_user(data)
+        print user
 
         data = {"paper_id": paper['id']}
         articles = self.models['NewsModel'].get_articles(data)

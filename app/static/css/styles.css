@@ -105,10 +105,28 @@ button.arrow{
 	margin-left: 15em;
 	padding:1em;
 	border-left: 1px solid black;
-
-
 }
 
+#s_res{
+	width:800em;
+	margin-left:5em;
+	margin-top:3em;
+	border-left: 1px solid black;
+}
+
+#s_res table{
+	padding: .5em;
+}
+
+#s_res table tr td{
+	margin: 5em;
+	width:13em;
+	height:3em;
+}
+
+#s_res td{
+	margin-right: 3em;
+}
 #copy{
 	text-align: center;
 }

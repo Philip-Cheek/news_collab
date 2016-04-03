@@ -122,8 +122,8 @@ class NewsModel(Model):
             password = info['password']
 
             pw_hash = self.bcrypt.generate_password_hash(password)
-            i_query = "INSERT INTO users (first_name, last_name, email, dob, paper_id, zip_code, created_at, password) VALUES (%s, %s, %s, %s, %s, NOW(), %s)"
-            i_data = [info['first_name'], info['last_name'], info['email'], info['dob'], info['zip_code'], p_id, pw_hash]
+            i_query = "INSERT INTO users (first_name, last_name, email, dob, paper_id, zip_code, created_at, password) VALUES (%s, %s, %s, %s, %s, %s, NOW(), %s)"
+            i_data = [info['first_name'], info['last_name'], info['email'], info['dob'], p_id, info['zip_code'], pw_hash]
             self.db.query_db(i_query, i_data)
             
             g_query = "SELECT *,users.id as user_id FROM users JOIN papers on users.paper_id = papers.id ORDER BY users.id DESC LIMIT 1"
@@ -163,13 +163,15 @@ class NewsModel(Model):
     def get_user(self,info):
         query = "SELECT * FROM users WHERE id = %s"
         data = [info['id']]
+        user = self.db.query_db(query, data)
+        return user[0]
 
     def render_full_city(self, info):
         data = [info['id']]
         query = "SELECT cities.name as city_name, countries.name as country_name FROM cities JOIN countries on countries.code = cities.country_code WHERE cities.id = %s"
         city = self.db.query_db(query,data)
         return city[0]
-        
+
     def get_articles(self, info):
         data = [info['paper_id']]
         query = "SELECT *, articles.id as article_id FROM articles join papers on articles.paper_id = papers.id where papers.id = %s"

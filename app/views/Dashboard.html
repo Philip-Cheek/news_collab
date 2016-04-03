@@ -1,11 +1,13 @@
 <html>
   <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/FeedEk.js"></script>
     <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
     <meta charset = "UTF-8">
     <script>
       $(document).ready(function(){
         
-        var x = {{user['zip']}}
+        var x = {{user['zip_code']}}
 
         $('#divRss').FeedEk({
           FeedUrl : 'https://news.google.com/news/section?geo=' + x + '&ar=1459384211&output=rss'
@@ -64,6 +66,7 @@
         </form> 
       </div>
     </div>
+    {{user['zip_code']}}
     {% with messages = get_flashed_messages() %}
         {% if messages %}
           <div id = "error">
