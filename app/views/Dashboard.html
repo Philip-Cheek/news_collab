@@ -90,17 +90,23 @@
     <div id = "intro_box">
       <div id = 'circle'>
         {%if session['url'] == '/static/uploads/default.png'%}
-          <form action = "/create" method= "post" enctype="multipart/form-data">
-            <input type="file" class = "up_image" name="image" accept="image/*">
-            <button type = "submit" class = "b_image">Change Pic!</button> 
-          </form> 
+          <div id = "if_box">
+            <form action = "/create" method= "post" enctype="multipart/form-data">
+              <input type="file" class = "up_image" name="image" accept="image/*">
+              <button type = "submit" class = "b_image">Change Pic!</button> 
+            </form> 
+          </div>
         {%endif%}
         <a href = "/users/{{session['id']}}"><img class = 'prof_pic'src = "session['url']" alt = "you" width = "100"></a>
       </div>
       <div id = "detail_box">
-        <a href = "/users/{{session['id']}}"> Your Profile
+        <a href = "/users/{{session['id']}}"> Your Profile</a>
+        <a href = "/users/{{session['id']}}/edit">Edit Profile</a> 
+        <a href = ""
       </div> 
     </div> 
+
+    <button id = ""
 
     <div id = "write_art"></div> 
       <h3>Write an article, today!</h3>
