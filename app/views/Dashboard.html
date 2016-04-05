@@ -103,9 +103,39 @@
           <option value = "opinion">Opinion</option>
           <option value = "sports">Sports</option>
           <option value = "business">Business</option>
-          <option value = ""
-      </form> 
-       
+          <option value = "classifieds">Classifieds</option>
+          <option value = "entertainment">Entertainment</option>
+
+        </select>
+        <button type = "submit">Write!</submit> 
+      </form>
+    </div>
+  
+  <div id = "pipeline">
+    <table> 
+      <tr>
+        <td>Article</td>
+        <td>Original Author</td> 
+        <td> Category</td>
+        <td>Last Updated by</td> 
+    {%if articles%}
+      {%for article in articles%}
+      <tr>
+        <td>{{article['content']}}</td>
+        <td>{{article['author']}}</td>
+        <td>{{article['category']}}</td>
+        <td>{{article['editor']}}</td>
+      <tr>
+      {%endfor%}
+      </table>
+    {%else%}
+      </table>
+      <p class = "none">No articles, yet!</p>
+    {%endif%}
+    </div>
+
+
+      {%article['title']}
 
 
 
