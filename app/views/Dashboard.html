@@ -96,9 +96,9 @@
 
     <div id = "write_art"></div> 
       <h3>Author an Article</h3>
-      <form action = "/author">
+      <form action = "dashboard/new_art" method = "post">
         <p>Pick a category!</p> 
-        <select> 
+        <select name = "category"> 
           <option value = "news">News</option>
           <option value = "opinion">Opinion</option>
           <option value = "sports">Sports</option>
@@ -132,14 +132,7 @@
       </table>
       <p class = "none">No articles, yet!</p>
     {%endif%}
-    </div>
-
-
-      {%article['title']}
-
-
-
-
+  </div>
 
     <div id = "border1">
       <div id = "border2">

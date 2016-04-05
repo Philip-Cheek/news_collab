@@ -136,10 +136,23 @@ class News(Controller):
         data = {"paper_id": paper['id']}
         articles = self.models['NewsModel'].get_articles(data)
 
-
-
-        
         return self.load_view('dashboard.html', user = user)
+
+    def new_art(self):
+        init_c = request.form['category'][0]
+        return redirect('dashboard/write/' + init_c)
+
+    def write_new(self, init_c):
+        initial = init_c
+        return render_template(write.html)
+
+
+
+
+
+
+
+
 
 
 
