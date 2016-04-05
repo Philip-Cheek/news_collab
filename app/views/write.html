@@ -46,10 +46,19 @@
 	   		{%else%}
 	   			<option value = "Entertainment">Entertainment</option>
 	   		{%endif%}
-	   	</form>
-   </body> 
    <div id = "article_area">
    	<form action = "/submit_art">
-   		<textarea name = "article">
+   		<textarea id = "art_ar" name = "article" rows = "30" cols = "90">
    		</textarea>
+   		<div id = "sources"> 
+   			<ol><span class = "g">Source guidelines</span>
+   				<li>Sources MUST be valid link</li>
+   				<li>Minimum two sources for news-related items</li> 
+   			</ol> 
+   			<input type = "text" name = "source[]" value = "1">
+   			<input type = "text" name = "source[]" value = "2">
+   		</div>
+   		<button id = "add_source">Add Source!</buttoN> 
+   		<div> 
+   		<button id = "art_submit" name = "submit">Submit!</button> 
    	</form>
