@@ -5,12 +5,21 @@
 	    <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
 	    <meta charset = "UTF-8">
 	    <script>
-	      $(document).ready(function(){
+	    	var h_cat = {{i_category}};
+	    	if (h_cat == "n" || h_cat == "b"){$('#sources').show();};
+
+	      $(document).ready(function(){}
 	      	('option').click(function(){
-	      		var category_select = $(this).attr('id')
-	      		if (category_select != "n"){
-	      			
+	      		h_cat = $(this).attr('id');
+	      		if &
+	      		if (h_cat != "n" || h_cat != "b"){
+	      			if ($('#sources').is(":visible")){$('#sources').slideUp();}
+	      		}else {
+	      			($('#sources').is(":visible") == false){$('$sources').slideDown();}
 	      		}
+
+
+
 
 
 
@@ -20,6 +29,7 @@
 	    </script>
    </head>
    <body> 
+
    	<div id ='subwrite'>
    		<h2>What do you have to say about your city?</h2>
    	</div>
@@ -60,10 +70,9 @@
 
 	    
 	   <div id = "article_area">
-	   	<form = 
 	   		<textarea id = "art_ar" name = "article" rows = "30" cols = "90">
 	   		</textarea>
-	   		<div id = "sources"> 
+	   		<div id = "sources" style = "display:hidden"> 
 	   			<ol><span class = "g">Source guidelines</span>
 	   				<li>Sources MUST be valid link</li>
 	   				<li>Minimum two sources for news-related items</li> 
@@ -75,6 +84,15 @@
 	   		<div> 
 	   		<button id = "art_submit" name = "submit">Submit!</button> 
 	   	</div>
+
    	</form>
+
+   	<div id = "art_table">
+   		<table>
+   			<tr>
+   				<td> 
+   		{%for article in articles%}
+
+
 
 
