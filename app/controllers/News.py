@@ -143,8 +143,8 @@ class News(Controller):
         return redirect('dashboard/write/' + init_c)
 
     def write_new(self, init_c):
-        initial = init_c
-        return render_template(write.html)
+        initial_c = init_c
+        return render_template(write.html, i_category = initial_c)
 
 
 

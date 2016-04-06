@@ -6,59 +6,71 @@
 	    <meta charset = "UTF-8">
 	    <script>
 	      $(document).ready(function(){
+	      	('option').click(function(){
+	      		var category_select = $(this).attr('id')
+	      		if category_select = "n" 
+
+
+
+
+	      	});
+	      });
 	    </script>
    </head>
    <body> 
    	<div id ='subwrite'>
    		<h2>What do you have to say about your city?</h2>
    	</div>
-   	<div id = 'cat_pic'>
+   	<div id = 'cat_pic' method = 'post'>
    		<p>File To: </p>
-	   	<form action = "/cat_pic">
+	   	<form id = "/cat_pic">
 	   		<select name = "category"> 
 	   		{%if i_category == "n"}
-	   			<option value = "news" selected = 'selected'>News</option>
+	   			<option id = 'n' class = 'o' value = "n" selected = 'selected'>News</option>
 	   		{%else%}
-	   			<option value = "news">News</option>
+	   			<option id = 'n' class = 'o' value = "n">News</option>
 	   		{%endif%}
 	   		{%if i_category == "o"}
-	   			<option value = "opinion" selected = 'selected'>Opinion</option>
+	   			<option id = 'o' class = 'o'value = "o" selected = 'selected'>Opinion</option>
 	   		{%else%}
-	   			<option value = "opinion">Opinion</option>
+	   			<option id = 'o' class = 'o' value = "o">Opinion</option>
 	   		{%endif%}
 	   		{%if i_category == "s"}
-	   			<option value = "Sports" selected = 'selected'>Sports</option>
+	   			<option id = 's' class = 'o' value = "s" selected = 'selected'>Sports</option>
 	   		{%else%}
-	   			<option value = "Sports">Sports</option>
+	   			<option id = 's' class = 'o' value = "s">Sports</option>
 	   		{%endif%}
 	   		{%if i_category == "b"}
-	   			<option value = "Business" selected = 'selected'>Business</option>
+	   			<option id = 'b' class = 'o' value = "b" selected = 'selected'>Business</option>
 	   		{%else%}
-	   			<option value = "Business">Business</option>
+	   			<option id = 'b' class = 'o' value = "b">Business</option>
 	   		{%endif%}
 	   		{%if i_category == "c"}
-	   			<option value = "Classifieds" selected = 'selected'>Classifieds</option>
+	   			<option id = 'c' class = 'o' value = "c" selected = 'selected'>Classifieds</option>
 	   		{%else%}
-	   			<option value = "Classifieds">Classifieds</option>
+	   			<option id = 'c' class = 'o' value = "c">Classifieds</option>
 	   		{%endif%}
 	   		{%if i_category == "e"}
-	   			<option value = "Entertainment" selected = 'selected'>Entertainment</option>
+	   			<option id = 'e' class = 'o' value = "e" selected = 'selected'>Entertainment</option>
 	   		{%else%}
-	   			<option value = "Entertainment">Entertainment</option>
+	   			<option id = 'e' value = "Entertainment">Entertainment</option>
 	   		{%endif%}
-   <div id = "article_area">
-   	<form action = "/submit_art">
-   		<textarea id = "art_ar" name = "article" rows = "30" cols = "90">
-   		</textarea>
-   		<div id = "sources"> 
-   			<ol><span class = "g">Source guidelines</span>
-   				<li>Sources MUST be valid link</li>
-   				<li>Minimum two sources for news-related items</li> 
-   			</ol> 
-   			<input type = "text" name = "source[]" value = "1">
-   			<input type = "text" name = "source[]" value = "2">
-   		</div>
-   		<button id = "add_source">Add Source!</buttoN> 
-   		<div> 
-   		<button id = "art_submit" name = "submit">Submit!</button> 
+
+	    
+	   <div id = "article_area">
+	   	<form = 
+	   		<textarea id = "art_ar" name = "article" rows = "30" cols = "90">
+	   		</textarea>
+	   		<div id = "sources"> 
+	   			<ol><span class = "g">Source guidelines</span>
+	   				<li>Sources MUST be valid link</li>
+	   				<li>Minimum two sources for news-related items</li> 
+	   			</ol> 
+	   			<input type = "text" name = "source[]" value = "1">
+	   			<input type = "text" name = "source[]" value = "2">
+	   		</div>
+	   		<button id = "add_source">Add Source!</buttoN> 
+	   		<div> 
+	   		<button id = "art_submit" name = "submit">Submit!</button> 
+	   	</div>
    	</form>
