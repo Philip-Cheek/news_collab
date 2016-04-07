@@ -190,7 +190,6 @@ class NewsModel(Model):
         query = "INSERT INTO articles (title, content, paper_id, author_id, category, created_at) VALUES (%s, %s, %s, %s, NOW())"
         self.db.query_db(query, data)
 
-    def simple_paper(self, info)
 
 
 ''''
