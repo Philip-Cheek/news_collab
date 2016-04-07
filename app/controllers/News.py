@@ -134,9 +134,11 @@ class News(Controller):
         print user
 
         data = {"paper_id": paper['id']}
-        articles = self.models['NewsModel'].get_articles(data)
+        data['id': 'paper_id']
+        paper = self.model['NewsModel'].render_paper
+        articles = self.models['NewsModel'].render_articles(data)
 
-        return self.load_view('dashboard.html', user = user)
+        return self.load_view('dashboard.html', user = user, articles = article)
 
     def new_art(self):
         init_c = request.form['category'][0]
@@ -152,10 +154,25 @@ class News(Controller):
             "c": "classifieds",
             "e": "entertainment"
         }
-        return render_template(write.html, i_category = initial_c)
+
+        info = {'paper_id': session['paper_id']}
+        articles = render_articles(info)
+        return render_template(write.html, i_category = initial_c, full_category = full_category)
 
     def write_submit(self):
-        info = 
+        info = {
+            'title': request.form['title'],
+            'paper_id': session['paper_id'],
+            'author_id': session['user_id'],
+            'category': request.form['category'],
+            'content': request.form['content']
+        }
+
+        data = {"info": session['user_id']}
+        user = self.models['NewsModel'}.get_user(data)
+
+        return redirect("/dashboard/" + str(user['city_id']) + "_" + str(session['user_id']))
+
 
 
 

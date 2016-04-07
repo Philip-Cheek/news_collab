@@ -27,8 +27,8 @@ class NewsModel(Model):
         else:
             return {"results": False, "city": cities[0]}
                 
-    def get_all_articles_auth(self, info):
-        query = "SELECT *,aricles.id as article_id, users.id as orig_user_id FROM articles JOIN users ON articles.author_id = users.id JOIN WHERE articles.paper_id = %s"
+    def render_articles (self, info):
+        query = "SELECT aricles.title as article_title, CONCAT(users.first_name, ' ', users.last_name) as author_name, aritcles.created_at as date_created, articles.updated_at as edit_commit CONCAT (editors.first_name, ' ', editors.last_name)) as editor_name FROM articles JOIN users ON articles.author_id = users.id JOIN edits on edits.article_id = articles.id JOIN users as editors on editors.id = edits.user_id WHERE articles.paper_id = %s ORDER BY articles.updated_at DESC LIMIT 75"
         data = [info['paper_id']]
         return self.db.query_db(query, data)
 
@@ -186,9 +186,11 @@ class NewsModel(Model):
 
 
     def new_article(self, info): 
-        data = [info['article_name'], info['city_id'], info['author_id'], info['category']]
-        query = self.db
+        data = [info['title'], info['content'] info['paper_id'], info['author_id'], info['category']]
+        query = "INSERT INTO articles (title, content, paper_id, author_id, category, created_at) VALUES (%s, %s, %s, %s, NOW())"
+        self.db.query_db(query, data)
 
+    def simple_paper(self, info)
 
 
 ''''
@@ -315,8 +317,6 @@ class NewsModel(Model):
     def get_all_replies(self):
         query = "SELECT * FROM comments"
         return self.db.query_db(query)
-
-
 
 
     def all_users(self):
