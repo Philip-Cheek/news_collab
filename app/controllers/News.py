@@ -144,8 +144,18 @@ class News(Controller):
 
     def write_new(self, init_c):
         initial_c = init_c
+        full_category = {
+            "n": "news",
+            "o": "opinion",
+            "s": "sports",
+            "b": "business",
+            "c": "classifieds",
+            "e": "entertainment"
+        }
         return render_template(write.html, i_category = initial_c)
 
+    def write_submit(self):
+        info = 
 
 
 

@@ -9,6 +9,7 @@ class NewsModel(Model):
     def __init__(self):
         super(NewsModel, self).__init__()
 
+
     def search(self, info):
         query = "SELECT * FROM cities WHERE name = %s"
         data = [info['name']]
@@ -184,6 +185,9 @@ class NewsModel(Model):
         return {"status": True, "article_list": articles}
 
 
+    def new_article(self, info): 
+        data = [info['article_name'], info['city_id'], info['author_id'], info['category']]
+        query = self.db
 
 
 

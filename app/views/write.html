@@ -38,11 +38,6 @@
 					$('#c_change').text(full_category[h_cat]);
 				});
 			});
-
-
-
-
-
 	    </script>
    </head>
    <body> 
@@ -51,84 +46,87 @@
    		<h1><span id = "c_change">{{full_category[i_category]}}</span></h1>
    		<h2>Share your insights about {{city['name']}}</h2>
    	</div>
-   	<div id = 'cat_pic' method = 'post'>
-   		<p>File To: </p>
-	   	<form id = "/cat_pic">
-	   		<select id = "select_c"> 
-	   		{%if i_category == "n"}
-	   			<option id = 'n' class = 'o' value = "n" selected = 'selected'>News</option>
-	   		{%else%}
-	   			<option id = 'n' class = 'o' value = "n">News</option>
-	   		{%endif%}
-	   		{%if i_category == "o"}
-	   			<option id = 'o' class = 'o'value = "o" selected = 'selected'>Opinion</option>
-	   		{%else%}
-	   			<option id = 'o' class = 'o' value = "o">Opinion</option>
-	   		{%endif%}
-	   		{%if i_category == "s"}
-	   			<option id = 's' class = 'o' value = "s" selected = 'selected'>Sports</option>
-	   		{%else%}
-	   			<option id = 's' class = 'o' value = "s">Sports</option>
-	   		{%endif%}
-	   		{%if i_category == "b"}
-	   			<option id = 'b' class = 'o' value = "b" selected = 'selected'>Business</option>
-	   		{%else%}
-	   			<option id = 'b' class = 'o' value = "b">Business</option>
-	   		{%endif%}
-	   		{%if i_category == "c"}
-	   			<option id = 'c' class = 'o' value = "c" selected = 'selected'>Classifieds</option>
-	   		{%else%}
-	   			<option id = 'c' class = 'o' value = "c">Classifieds</option>
-	   		{%endif%}
-	   		{%if i_category == "e"}
-	   			<option id = 'e' class = 'o' value = "e" selected = 'selected'>Entertainment</option>
-	   		{%else%}
-	   			<option id = 'e' value = "Entertainment">Entertainment</option>
-	   		{%endif%}
+   	<div id = 'form_area'>
+   		<form id = "/write_submit" method = "post">
+   			<div id = "head">
+		   		Title: <input type = "text" name = "title"> 
+			   	<p>File To: </p>
+		   		<select id = "select_c"> 
+		   		{%if i_category == "n"}
+		   			<option id = 'n' class = 'o' value = "n" selected = 'selected'>News</option>
+		   		{%else%}
+		   			<option id = 'n' class = 'o' value = "n">News</option>
+		   		{%endif%}
+		   		{%if i_category == "o"}
+		   			<option id = 'o' class = 'o'value = "o" selected = 'selected'>Opinion</option>
+		   		{%else%}
+		   			<option id = 'o' class = 'o' value = "o">Opinion</option>
+		   		{%endif%}
+		   		{%if i_category == "s"}
+		   			<option id = 's' class = 'o' value = "s" selected = 'selected'>Sports</option>
+		   		{%else%}
+		   			<option id = 's' class = 'o' value = "s">Sports</option>
+		   		{%endif%}
+		   		{%if i_category == "b"}
+		   			<option id = 'b' class = 'o' value = "b" selected = 'selected'>Business</option>
+		   		{%else%}
+		   			<option id = 'b' class = 'o' value = "b">Business</option>
+		   		{%endif%}
+		   		{%if i_category == "c"}
+		   			<option id = 'c' class = 'o' value = "c" selected = 'selected'>Classifieds</option>
+		   		{%else%}
+		   			<option id = 'c' class = 'o' value = "c">Classifieds</option>
+		   		{%endif%}
+		   		{%if i_category == "e"}
+		   			<option id = 'e' class = 'o' value = "e" selected = 'selected'>Entertainment</option>
+		   		{%else%}
+		   			<option id = 'e' value = "Entertainment">Entertainment</option>
+		   		{%endif%}
+			</div>
 
-	    
-	   <div id = "article_area">
-	   		<textarea id = "art_ar" name = "article" rows = "30" cols = "90">
-	   		</textarea>
-	   		<div id = "sources" style = "display:hidden"> 
-	   			<ol><span class = "g">Source guidelines</span>
-	   				<li>Sources MUST be valid link</li>
-	   				<li>Minimum two sources for news-related items</li> 
-	   			</ol> 
-	   			<input type = "text" name = "source[]" value = "1">
-	   			<input type = "text" name = "source[]" value = "2">
-	   		</div>
-	   		<button id = "add_source">Add Source!</buttoN> 
-	   		<div> 
-	   		<button id = "art_submit" name = "submit">Submit!</button> 
-	   	</div>
+		    
+		   <div id = "article_area">
+		   		<textarea id = "art_ar" name = "article" rows = "30" cols = "90">
+		   		</textarea>
+		   		<div id = "sources" style = "display:hidden"> 
+		   			<ol><span class = "g">Source guidelines</span>
+		   				<li>Sources MUST be valid link</li>
+		   				<li>Minimum two sources for news-related items</li> 
+		   			</ol> 
+		   			<input type = "text" name = "source[]" value = "1">
+		   			<input type = "text" name = "source[]" value = "2">
+		   		</div>
+		   		<button id = "add_source">Add Source!</buttoN> 
+		   		<div> 
+		   		<button id = "art_submit" name = "submit">Submit!</button> 
+		   	</div>
 
-   	</form>
+	   	</form>
 
-   	<div id = "articles">
-   		<h2 id>Recent articles in <span id = "c_change">{{full_category[i_category]}}</span><h2>
-   		<table id = "art_table">
-   			<tr>
-   				<td>Article</td>
-   				<td>Date Published</td>
-   				<td>Lead Author</td>
-   				<td>Last Edited By</td>
-   			</tr>
-   		{%if articles%}
-	   		{%for article in articles%}
-	   			<tr name = "article['category']" style = "display:none">
-		   			<td>{{article['article_name']}}</td>
-		   			<td>{{article['articles_created']}}</td>
-		   			<td>{{article['author']}}</td>
-		   			<td>{{article['editor']}}</td>
-		   		</tr>
-	   		{%endfor%}
-	   		</table>
-	   	{%else%}
-	   		</table>
-	   		<h3>No articles in this category</h3>
-	   	{%endif%}
-	</div>
+	   	<div id = "articles">
+	   		<h2 id>Recent articles in <span id = "c_change">{{full_category[i_category]}}</span><h2>
+	   		<table id = "art_table">
+	   			<tr>
+	   				<td>Article</td>
+	   				<td>Date Published</td>
+	   				<td>Lead Author</td>
+	   				<td>Last Edited By</td>
+	   			</tr>
+	   		{%if articles%}
+		   		{%for article in articles%}
+		   			<tr name = "article['category']" style = "display:none">
+			   			<td>{{article['article_name']}}</td>
+			   			<td>{{article['articles_created']}}</td>
+			   			<td>{{article['author']}}</td>
+			   			<td>{{article['editor']}}</td>
+			   		</tr>
+		   		{%endfor%}
+		   		</table>
+		   	{%else%}
+		   		</table>
+		   		<h3>No articles in this category</h3>
+		   	{%endif%}
+		</div>
 
 
 
