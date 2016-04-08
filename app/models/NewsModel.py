@@ -28,9 +28,10 @@ class NewsModel(Model):
             return {"results": False, "city": cities[0]}
                 
     def render_articles (self, info):
-        query = "SELECT aricles.title as article_title, CONCAT(users.first_name,' ', users.last_name) as author_name, aritcles.created_at as date_created, articles.updated_at as edit_commit, CONCAT(editors.first_name,' ', editors.last_name) as editor_name FROM articles JOIN users ON articles.author_id = users.id LEFT JOIN edits on edits.article_id = articles.id JOIN users as editors on editors.id = edits.user_id WHERE articles.paper_id = %s ORDER BY articles.updated_at DESC LIMIT 75"
+        query = "SELECT articles.title as article_title, CONCAT(users.first_name,' ', users.last_name) as author_name, articles.created_at as date_created, articles.updated_at as edit_commit, CONCAT(editors.first_name,' ', editors.last_name) as editor_name FROM articles JOIN users ON articles.author_id = users.id LEFT JOIN edits on edits.article_id = articles.id JOIN users as editors on editors.id = edits.user_id WHERE articles.paper_id = %s ORDER BY date_created DESC LIMIT 75"
         data = [info['paper_id']]
         return self.db.query_db(query, data)
+    
 
     def get_city(self, info):
         query = "SELECT * FROM cities WHERE id = %s"

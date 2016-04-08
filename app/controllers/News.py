@@ -91,9 +91,10 @@ class News(Controller):
             print x 
             filename = secure_filename(file.filename)
             file.save(os.path.join(x + "/uploads", filename))
-            info = {'url': '/static/' + filename}
+            info = {'url': "/static/uploads/" + filename}
         
         session['url'] = info['url']
+        print session['url']
         info['user_id'] = session['user_id']
         self.models['NewsModel'].upload_image(info)
 
@@ -136,11 +137,11 @@ class News(Controller):
         print user
 
         data = {"paper_id": paper['id']}
-        data['id'] = ['paper_id']
-        paper = self.models['NewsModel'].render_paper
+        data['id'] = info[0]
+        paper = self.models['NewsModel'].render_paper(data)
         articles = self.models['NewsModel'].render_articles(data)
 
-        return self.load_view('dashboard.html', user = user, articles = article)
+        return self.load_view('dashboard.html', user = user, articles = articles)
 
     def new_art(self):
         init_c = request.form['category'][0]
