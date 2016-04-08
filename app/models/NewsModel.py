@@ -28,7 +28,7 @@ class NewsModel(Model):
             return {"results": False, "city": cities[0]}
                 
     def render_articles (self, info):
-        query = "SELECT aricles.title as article_title, CONCAT(users.first_name, ' ', users.last_name) as author_name, aritcles.created_at as date_created, articles.updated_at as edit_commit CONCAT (editors.first_name, ' ', editors.last_name)) as editor_name FROM articles JOIN users ON articles.author_id = users.id JOIN edits on edits.article_id = articles.id JOIN users as editors on editors.id = edits.user_id WHERE articles.paper_id = %s ORDER BY articles.updated_at DESC LIMIT 75"
+        query = "SELECT aricles.title as article_title, CONCAT(users.first_name,' ', users.last_name) as author_name, aritcles.created_at as date_created, articles.updated_at as edit_commit, CONCAT(editors.first_name,' ', editors.last_name) as editor_name FROM articles JOIN users ON articles.author_id = users.id LEFT JOIN edits on edits.article_id = articles.id JOIN users as editors on editors.id = edits.user_id WHERE articles.paper_id = %s ORDER BY articles.updated_at DESC LIMIT 75"
         data = [info['paper_id']]
         return self.db.query_db(query, data)
 
@@ -85,7 +85,9 @@ class NewsModel(Model):
         else: 
             paper_query = "SELECT *,papers.id as paper_id, cities.id as city_id FROM cities JOIN papers on papers.city_id = cities.id WHERE cities.id = %s"
             data = [check[0]['id']]
+
             paper_city = self.db.query_db(paper_query, data)
+            print paper_city 
             print data 
             print paper_city
 
@@ -132,9 +134,9 @@ class NewsModel(Model):
             users = self.db.query_db(g_query)
             return {"status": True, "user": users[0], "city_id": city_id}
 
-    def upload_image(self,image):
-        query = "INSERT INTO users (url) VALUES (%s)"
-        data = [info['url']]
+    def upload_image(self,info):
+        query = "UPDATE users SET url = %s where id = %s"
+        data = [info['url'], info['user_id']]
         url = self.db.query_db(query, data)
         
 
@@ -186,7 +188,7 @@ class NewsModel(Model):
 
 
     def new_article(self, info): 
-        data = [info['title'], info['content'] info['paper_id'], info['author_id'], info['category']]
+        data = [info['title'], info['content'], info['paper_id'], info['author_id'], info['category']]
         query = "INSERT INTO articles (title, content, paper_id, author_id, category, created_at) VALUES (%s, %s, %s, %s, NOW())"
         self.db.query_db(query, data)
 

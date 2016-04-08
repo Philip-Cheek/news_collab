@@ -58,7 +58,7 @@
     	  {%for x in results%}
           <tr>
             <td>{{x}}</td>
-            <td><a href = "/paper/{{x['id']}}">{{results[x]['name']}}</a></td>
+            <td><a href = "/paper/{{results[x]['city_id']}}">{{results[x]['name']}}</a></td>
         {%endfor%}
       {%endif%}
     </div>

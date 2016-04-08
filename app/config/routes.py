@@ -13,7 +13,7 @@ routes['POST']['/login'] = 'News#login'
 routes['/log_page'] = 'News#log_page'
 routes['/dashboard/<double_id>'] = 'News#dashboard'
 routes['POST']['/new_art'] = 'News#new_art'
-routes['dashbaord/writet/<init_c>'] = 'News#write_new'
+routes['/dashbaord/write/<init_c>'] = 'News#write_new'
 routes['POST']['/write_submit'] = 'News#write_submit'
 
     
