@@ -33,6 +33,13 @@ class NewsModel(Model):
         return self.db.query_db(query, data)
     
 
+    '''working on flexible models to cannibalize nearly repetitive queries'''
+    def get_any_flex(self, info):
+        query = "SELECT * FROM %s WHERE %s = %s"
+        data = [info['table'], [info['where']], info['data']]
+        return self.db_query_db(query, data)
+    '''we'll see'''
+
     def get_city(self, info):
         query = "SELECT * FROM cities WHERE id = %s"
         data = [info['id']]
@@ -163,6 +170,10 @@ class NewsModel(Model):
             return {"status": False}
 
         return {"status": True, "paper": paper[0]}
+
+    def paper_city(self, info):
+        data = [info['paper_id']]
+        query = "SELECT papers.id as paper_id, papers.name as paper_name," 
 
     def get_user(self,info):
         query = "SELECT * FROM users WHERE id = %s"

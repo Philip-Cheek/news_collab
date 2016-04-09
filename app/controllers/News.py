@@ -158,9 +158,9 @@ class News(Controller):
             "e": "entertainment"
         }
 
-        info = {'paper_id': session['paper_id']}
-        articles = render_articles(info)
-        return render_template(write.html, i_category = initial_c, full_category = full_category)
+        info = {'paper_id': session['user_paper']}
+        articles = self.models['NewsModel'].render_articles(info)
+        return self.load_view('write.html', i_category = initial_c, full_category = full_category)
 
     def write_submit(self):
         info = {
