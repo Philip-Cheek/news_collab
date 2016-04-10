@@ -38,7 +38,11 @@ class NewsModel(Model):
         query = "SELECT * FROM %s WHERE %s = %s"
         data = [info['table'], [info['where']], info['data']]
         return self.db_query_db(query, data)
-    '''we'll see'''
+    
+    def get_paper(self, info):
+        query = "SELECT * FROM papers JOIN cities on cities.id = papers.city_id WHERE ID = %s"
+        data = [info['paper_id']]
+        return self.db_query_db(query, data)
 
     def get_city(self, info):
         query = "SELECT * FROM cities WHERE id = %s"
@@ -140,7 +144,7 @@ class NewsModel(Model):
             g_query = "SELECT *,users.id as user_id FROM users JOIN papers on users.paper_id = papers.id ORDER BY users.id DESC LIMIT 1"
             users = self.db.query_db(g_query)
             users = self.db.query_db(g_query)
-            return {"status": True, "user": users[0], "city_id": city_id}
+            return {"status": True, "user": users[0]}
 
     def upload_image(self,info):
         query = "UPDATE users SET url = %s where id = %s"
@@ -203,6 +207,11 @@ class NewsModel(Model):
         data = [info['title'], info['content'], info['paper_id'], info['author_id'], info['category']]
         query = "INSERT INTO articles (title, content, paper_id, author_id, category, created_at) VALUES (%s, %s, %s, %s, NOW())"
         self.db.query_db(query, data)
+
+    def render_editors(self, info):
+        query = "SELECT * FROM users LEFT JOIN WHERE paper_id = %s ORDER BY created_at DESC"
+        data = [info['paper_id']]
+        return self.db.query_db(query, data)
 
 
 

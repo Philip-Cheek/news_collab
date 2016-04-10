@@ -12,8 +12,8 @@ class News(Controller):
     
     def index(self):
         if 'user_id' not in session:
-            return redirect('/')
-        return self.load_view('index.html')
+            return self.load_view('index.html')
+        return redirect('/dashboard/' + session['paper_id'] + "_" + session['user_id'])
 
     def search(self):
         info = {'name': request.form['search']} 
@@ -83,7 +83,7 @@ class News(Controller):
         print file 
 
         session['user_id'] = reg['user']['user_id']
-        session['user_paper'] = reg['user']['paper_id']
+        session['paper_id'] = reg['user']['paper_id']
         session['name'] = reg['user']['first_name'] + " " + reg['user']['last_name']
 
         if not file:
@@ -100,7 +100,7 @@ class News(Controller):
         info['user_id'] = session['user_id']
         self.models['NewsModel'].upload_image(info)
 
-        return redirect("/dashboard/" + str(reg['city_id']) + "_" + str(session['user_id']))
+        return redirect("/dashboard/" + str(session['paper_id']) + "_" + str(session['user_id']))
 
     def login(self):
         data = {
@@ -117,30 +117,26 @@ class News(Controller):
         print log
         print log['user']
         session['user_id'] = log['user']['user_id']
-        session['user_paper'] = log['user']['paper_id']
+        session['paper_id'] = log['user']['paper_id']
         session['name'] = log['user']['first_name'] + " " + log['user']['last_name']
         session['url'] = log['user']['url']
 
-        return redirect("/dashboard/" + str(log['user']['city_id']) + "_" + str(session['user_id']))
+        return redirect("/dashboard/" + str(log['user']['paper_id']) + "_" + str(session['user_id']))
 
     def log_page(self):
         return self.load_view("log_page.html")
 
     def dashboard(self, double_id):
-        info = double_id.split('_')
+        data = {
+            "paper_id": session['paper_id'],
+            "user_id": session['user_id']
+        }
 
-        data = {"id": info[0]}
-        paper = self.models['NewsModel'].render_paper(data)
-
-        print session
-        print session['user_id']
-        data = {"id": session['user_id']}
+        paper = self.models['NewsModel'].get_paper(data)
         user = self.models['NewsModel'].get_user(data)
-        print user
-
-        data = {"paper_id": paper['id']}
-        data['id'] = info[0]
-        paper = self.models['NewsModel'].render_paper(data)
+        articles = self.models['NewsModel'].render_articles(data)
+        editors = self.models['NewsModel'].render_editors(data)
+        
         articles = self.models['NewsModel'].render_articles(data)
 
         return self.load_view('dashboard.html', user = user, articles = articles)
