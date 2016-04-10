@@ -15,6 +15,7 @@ routes['/dashboard/<double_id>'] = 'News#dashboard'
 routes['POST']['/new_art'] = 'News#new_art'
 routes['/dashboard/write/<init_c>'] = 'News#write_new'
 routes['POST']['/write_submit'] = 'News#write_submit'
+routes['POST']["/logout"] = 'News#logout'
 
     
     #routes['PUT']['/users/<int:id>'] = 'users#update'

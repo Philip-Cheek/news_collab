@@ -17,6 +17,7 @@
         </div> 
         <div id = "logbatch">
           <a href = "/log_page" class = "login">LOGIN</a>
+          {%if not session['user_id']%}
           <form action = "/login" method = "post">
             <div id = "login_bar">
               <input type = "text" name = "email" placeholder="Email"><br>
@@ -25,6 +26,14 @@
               <button type = "submit" class = "arrow">&rarr;</button>
             </form>
           </div>
+          {%else%}
+            <div id = "login_bar">
+              <form action = "/logout" method = "post">
+                <button type = "submit" class = "lo">Log Out!</button>
+              </form> 
+            </div>
+          {%endif%}
+
       </div>
       <div id = "sbar">
         <form action = "/search" method = "post">

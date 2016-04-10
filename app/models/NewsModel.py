@@ -34,7 +34,7 @@ class NewsModel(Model):
     
 
     '''working on flexible models to cannibalize nearly repetitive queries'''
-    def get_any_flex(self, info):
+    def get_table_flex(self, info):
         query = "SELECT * FROM %s WHERE %s = %s"
         data = [info['table'], [info['where']], info['data']]
         return self.db_query_db(query, data)
@@ -203,6 +203,7 @@ class NewsModel(Model):
         data = [info['title'], info['content'], info['paper_id'], info['author_id'], info['category']]
         query = "INSERT INTO articles (title, content, paper_id, author_id, category, created_at) VALUES (%s, %s, %s, %s, NOW())"
         self.db.query_db(query, data)
+
 
 
 

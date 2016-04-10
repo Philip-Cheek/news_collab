@@ -11,6 +11,8 @@ class News(Controller):
         self.load_model('NewsModel')
     
     def index(self):
+        if 'user_id' not in session:
+            return redirect('/')
         return self.load_view('index.html')
 
     def search(self):
@@ -173,14 +175,14 @@ class News(Controller):
 
         data = {"info": session['user_id']}
         user = self.models['NewsModel'].get_user(data)
+        data = {"id": session}
 
         return redirect("/dashboard/" + str(user['city_id']) + "_" + str(session['user_id']))
 
 
-
-
-
-
+    def logout(self):
+        session.clear()
+        return redirect("/")
 
 
 
