@@ -185,12 +185,17 @@ class News(Controller):
         user = self.models['NewsModel'].get_user(data)
 
         data['table'] = 'papers'
-        data['where'] = 'users.id'
+        data['where'] = 'author_id'
         data['data'] = user['id']
         paper = self.models['NewsModel'].get_table_flex(data)
 
         data['table'] = 'articles'
         articles = self.models['NewsModel'].get_table_flex(data)
+
+        data['table'] = 'edits'
+        edits = self.models['NewsModel'].get_table_flex(data)
+
+        return self.load_view('user.html', user = user, paper = paper[0], articles = articles[0], edits = edits[0])
 
 
 
