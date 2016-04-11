@@ -180,6 +180,21 @@ class News(Controller):
         session.clear()
         return redirect("/")
 
+    def users(self, id):
+        data = {"id": id}
+        user = self.models['NewsModel'].get_user(data)
+
+        data['table'] = 'papers'
+        data['where'] = 'users.id'
+        data['data'] = user['id']
+        paper = self.models['NewsModel'].get_table_flex(data)
+
+        data['table'] = 'articles'
+        articles = self.models['NewsModel'].get_table_flex(data)
+
+
+
+
 
 
 
