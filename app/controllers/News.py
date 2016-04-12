@@ -136,7 +136,7 @@ class News(Controller):
         user = self.models['NewsModel'].get_user(data)
         articles = self.models['NewsModel'].render_articles(data)
         editors = self.models['NewsModel'].render_editors(data)
-        
+
         articles = self.models['NewsModel'].render_articles(data)
 
         return self.load_view('dashboard.html', user = user, articles = articles)
@@ -157,11 +157,9 @@ class News(Controller):
         }
 
         info = {'paper_id': session['paper_id']}
-        paper = self.models['NewsModel'].get_paper
+        paper = self.models['NewsModel'].get_paper(info)
         articles = self.models['NewsModel'].render_articles(info)
-        console.log(articles)
-        info['id'] articles[0]
-        return self.load_view('write.html', i_category = initial_c, full_category = full_category)
+        return self.load_view('write.html', i_category = initial_c, full_category = full_category, paper = paper)
 
     def write_submit(self):
         info = {

@@ -42,7 +42,8 @@ class NewsModel(Model):
     def get_paper(self, info):
         query = "SELECT papers.name as title,cities.name as city_name FROM papers JOIN cities on cities.id = papers.city_id WHERE papers.id = %s"
         data = [info['paper_id']]
-        return self.db.query_db(query, data)
+        paper = self.db.query_db(query, data)
+        return paper[0]
 
     def get_city(self, info):
         query = "SELECT * FROM cities WHERE id = %s"
