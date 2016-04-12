@@ -37,12 +37,12 @@ class NewsModel(Model):
     def get_table_flex(self, info):
         query = "SELECT * FROM %s WHERE %s = %s"
         data = [info['table'], [info['where']], info['data']]
-        return self.db_query_db(query, data)
+        return self.db.query_db(query, data)
     
     def get_paper(self, info):
-        query = "SELECT * FROM papers JOIN cities on cities.id = papers.city_id WHERE ID = %s"
+        query = "SELECT papers.name as title,cities.name as city_name FROM papers JOIN cities on cities.id = papers.city_id WHERE papers.id = %s"
         data = [info['paper_id']]
-        return self.db_query_db(query, data)
+        return self.db.query_db(query, data)
 
     def get_city(self, info):
         query = "SELECT * FROM cities WHERE id = %s"
@@ -181,7 +181,7 @@ class NewsModel(Model):
 
     def get_user(self,info):
         query = "SELECT * FROM users WHERE id = %s"
-        data = [info['id']]
+        data = [info['user_id']]
         user = self.db.query_db(query, data)
         return user[0]
 
@@ -209,7 +209,7 @@ class NewsModel(Model):
         self.db.query_db(query, data)
 
     def render_editors(self, info):
-        query = "SELECT * FROM users LEFT JOIN WHERE paper_id = %s ORDER BY created_at DESC"
+        query = "SELECT * FROM users WHERE paper_id = %s ORDER BY created_at DESC LIMIT 15"
         data = [info['paper_id']]
         return self.db.query_db(query, data)
 

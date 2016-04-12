@@ -52,7 +52,7 @@ class News(Controller):
             flash('No articles for this city... yet')
             return self.load_view("template_" + str(paper['style']) + ".html", paper = paper)
         
-        return self.load_view("template_" + str(paper['style']) + ".html", paper = paper, articles = articles['article_list'])
+        return self.load_view("template_" + str(paper['style']) + ".html", paper = paper, articles = articles['article_list'], city = city)
 
     def new(self):
         return self.load_view("new.html")
@@ -156,8 +156,11 @@ class News(Controller):
             "e": "entertainment"
         }
 
-        info = {'paper_id': session['user_paper']}
+        info = {'paper_id': session['paper_id']}
+        paper = self.models['NewsModel'].get_paper
         articles = self.models['NewsModel'].render_articles(info)
+        console.log(articles)
+        info['id'] articles[0]
         return self.load_view('write.html', i_category = initial_c, full_category = full_category)
 
     def write_submit(self):
@@ -171,7 +174,6 @@ class News(Controller):
 
         data = {"info": session['user_id']}
         user = self.models['NewsModel'].get_user(data)
-        data = {"id": session}
 
         return redirect("/dashboard/" + str(user['city_id']) + "_" + str(session['user_id']))
 
@@ -180,7 +182,7 @@ class News(Controller):
         session.clear()
         return redirect("/")
 
-    def users(self, id):
+    def user(self, id):
         data = {"id": id}
         user = self.models['NewsModel'].get_user(data)
 
