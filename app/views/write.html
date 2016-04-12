@@ -8,7 +8,7 @@
 			function render_rows(category){
 				var table = document.getElementById("art_table");
 				for (var i = 0; i < table.length; i++){ 
-					var row_id = table.rows[0].id;
+					var row_id = table.rows[i].id;
 					if (row_id == category){
 						if ($('#sources').is(":hidden")){
 							$('#' + row_id).show();
@@ -27,18 +27,25 @@
 	    		render_rows(h_cat);
 
 				$('#select_c').change(function(){
-					h_cat = $(this).val()
-					if (h_cat != "n" || h_cat != "b"){
-						if ($('#sources').is(":visible")){$('#sources').slideUp();}
-					}else {
-						if ($('#sources').is(":visible") == false){$('$sources').slideDown();}
-					};
+					h_cat = $(this).val();
+					console.log(h_cat);
+					function(event){
+						event.preventDefault();
 
-					render_rows(h_cat);
-					$('#c_change').text(full_category[h_cat]);
+						if (h_cat != "n" || h_cat != "b"){
+							if ($('#sources').is(":visible")){$('#sources').slideUp();}
+						}else {
+							if ($('#sources').is(":hidden")){$('#sources').slideDown();}
+						};
+						$('#c_change').text({{full_category[h_cat]}});
+					}
 				});
 
-				$('')
+				var sources = 2;
+				$('#add_source').click(function(){
+					sources += 1;
+					$('#sources').append("<p><input class = 'source' type = 'text' name = 'source[]'' value ='" + sources.toString() + "'</p>");
+				});
 			});
 	    </script>
    </head>
