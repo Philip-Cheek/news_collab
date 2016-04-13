@@ -13,15 +13,12 @@ class NewsModel(Model):
     def search(self, info):
         query = "SELECT * FROM cities WHERE name = %s"
         data = [info['name']]
-        print info 
         cities = self.db.query_db(query, data)
-        print cities 
-
 
         if len(cities) < 1:
             queryish = "SELECT * FROM cities WHERE name SOUNDS LIKE %s"
             candidates = self.db.query_db(queryish, data)
-            return {"results": True, "cities" : candidates}
+            results = {"results": True, "cities" : candidates}
         elif len(cities) > 1:
             return {"results": True, "cities" : cities}
         else:
@@ -142,6 +139,16 @@ class NewsModel(Model):
         query = "SELECT * FROM users WHERE paper_id = %s ORDER BY created_at DESC LIMIT 15"
         data = [info['paper_id']]
         return self.db.query_db(query, data)
+
+    def up_vote_article(self, info):
+        query = "UPDATE articles SET votes = votes + 1 WHERE id = %s"
+        data = [info['article_id']]
+        self.db.query_db(query, data)
+
+        return None
+
+    def down_vote_article(self, info):
+        query = "UPDATE articles SET votes = votes - 1 WHERE id = %s"
 
 
 

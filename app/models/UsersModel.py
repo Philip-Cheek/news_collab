@@ -23,14 +23,11 @@ class UserModel(Model):
     def get_edits(self, info):
     	data = [info['user_id']]
     	query = "SELECT * FROM articles JOIN edits WHERE edits.user_id = %s"
-
-            file = request.files['image']
-
+    	return self.db.query_db(query, data)
 
     def create_user(self,info):
         EMAIL_REGEX=re.compile(r'^[a-za-z0-9\.\+_-]+@[a-za-z0-9\._-]+\.[a-za-z]*$')
         errors = []
-
 
         if not info['first_name'] or not info['last_name']:
             errors.append('A name may not be blank')
