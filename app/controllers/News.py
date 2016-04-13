@@ -3,6 +3,7 @@ from collections import defaultdict
 import time
 import os
 from werkzeug import secure_filename
+from flask import jsonify
 
 
 class News(Controller):
@@ -92,7 +93,7 @@ class News(Controller):
             "password": request.form['pword']
         }
 
-        log = self.models['NewsModel'].log_user(data)
+        log = self.models['UserModel'].log_user(data)
 
         if log['status'] == False:
             flash("Incorrect information.")
@@ -178,6 +179,16 @@ class News(Controller):
         edits = self.models['NewsModel'].get_table_flex(data)
 
         return self.load_view('user.html', user = user, paper = paper[0], articles = articles[0], edits = edits[0])
+
+    def vote(self):
+        info = {"article_id": request.args.get('id')}
+        if request.args.get('vote') == True:
+            self.model['NewsModel'].up_vote_article(info)
+        else:
+            self.model['NewsModel'].down_vote_article(info)
+            
+        return None
+
 
 
 
