@@ -9,6 +9,7 @@ class News(Controller):
     def __init__(self, action):
         super(News, self).__init__(action)
         self.load_model('NewsModel')
+        self.load_model('UserModel')
     
     def index(self):
         if 'user_id' not in session:
@@ -67,38 +68,21 @@ class News(Controller):
             "dob": request.form['dob'],
             "password": request.form['pword'],
             "pw_confirm": request.form['cword']
+            "file": request.form['file']
         }
 
-        print request.form['email']
-        print data 
-        reg = self.models['NewsModel'].create_user(data)
+        reg = self.models['UserModel'].create_user(data)
 
         if reg['status'] == False:
             for error in reg['errors']:
                 flash(error)
             return redirect('/new')
         
-       
-        file = request.files['image']
-        print file 
 
         session['user_id'] = reg['user']['user_id']
         session['paper_id'] = reg['user']['paper_id']
         session['name'] = reg['user']['first_name'] + " " + reg['user']['last_name']
-
-        if not file:
-            info = {"url": '/static/default.png'}
-        else:
-            x = (os.path.dirname('/users/philipcheek/Desktop/news_collab/app/static/uploads'))
-            print x 
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(x + "/uploads", filename))
-            info = {'url': "/static/uploads/" + filename}
-        
-        session['url'] = info['url']
-        print session['url']
-        info['user_id'] = session['user_id']
-        self.models['NewsModel'].upload_image(info)
+        session['url'] = reg['user']['url']
 
         return redirect("/dashboard/" + str(session['paper_id']) + "_" + str(session['user_id']))
 
@@ -114,8 +98,6 @@ class News(Controller):
             flash("Incorrect information.")
             return redirect('/log_page')
 
-        print log
-        print log['user']
         session['user_id'] = log['user']['user_id']
         session['paper_id'] = log['user']['paper_id']
         session['name'] = log['user']['first_name'] + " " + log['user']['last_name']
