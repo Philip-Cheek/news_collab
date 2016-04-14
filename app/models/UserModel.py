@@ -7,7 +7,7 @@ import re
 
 class UserModel(Model):
     def __init__(self):
-        super(NewsModel, self).__init__()
+        super(UserModel, self).__init__()
 
     def get_user(self, info):
     	data = [info['user_id']]
@@ -84,24 +84,24 @@ class UserModel(Model):
 
         if errors:
             return {'status': False, 'errors': errors}
-        else:
-            password = info['password']
-            file = request.files['image']
+        
+        password = info['password']
+        file = info['file']
 
-            if not file:
-            	url = '/static/default.png'
-        	else:
-            	path = (os.path.dirname('/users/philipcheek/Desktop/news_collab/app/static/uploads'))
-            	filename = secure_filename(file.filename)
-            	file.save(os.path.join(path + "/uploads", filename))
-            	url =  "/static/uploads/" + filename
+        if not file:
+        	url = '/static/default.png'
+    	else:
+        	img_path = (os.path.dirname('/users/philipcheek/Desktop/news_collab/app/static/uploads'))
+        	filename = secure_filename(file.filename)
+        	file.save(os.path.join(img_path + "/uploads", filename))
+        	url =  "/static/uploads/" + filename
 
-            pw_hash = self.bcrypt.generate_password_hash(password)
-            i_query = "INSERT INTO users (first_name, last_name, email, dob, url, paper_id, zip_code, created_at, password) VALUES (%s, %s, %s, %s, %s, %s, %s, NOW(), %s)"
-            i_data = [info['first_name'], info['last_name'], info['email'], info['dob'], url, p_id, info['zip_code'], pw_hash]
-            self.db.query_db(i_query, i_data)
-            
-            g_query = "SELECT *,users.id as user_id FROM users JOIN papers on users.paper_id = papers.id ORDER BY users.id DESC LIMIT 1"
-            users = self.db.query_db(g_query)
-            users = self.db.query_db(g_query)
-            return {"status": True, "user": users[0]}
+        pw_hash = self.bcrypt.generate_password_hash(password)
+        i_query = "INSERT INTO users (first_name, last_name, email, dob, url, paper_id, zip_code, created_at, password) VALUES (%s, %s, %s, %s, %s, %s, %s, NOW(), %s)"
+        i_data = [info['first_name'], info['last_name'], info['email'], info['dob'], url, p_id, info['zip_code'], pw_hash]
+        self.db.query_db(i_query, i_data)
+        
+        g_query = "SELECT *,users.id as user_id FROM users JOIN papers on users.paper_id = papers.id ORDER BY users.id DESC LIMIT 1"
+        users = self.db.query_db(g_query)
+        users = self.db.query_db(g_query)
+        return {"status": True, "user": users[0]}

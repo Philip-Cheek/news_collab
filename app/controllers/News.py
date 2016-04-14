@@ -15,7 +15,7 @@ class News(Controller):
     def index(self):
         if 'user_id' not in session:
             return self.load_view('index.html')
-        return redirect('/dashboard/' + session['paper_id'] + "_" + session['user_id'])
+        return redirect('/dashboard/' + str(session['paper_id']) + "_" + str(session['user_id']))
 
     def search(self):
         info = {'name': request.form['search']} 
@@ -68,8 +68,8 @@ class News(Controller):
             "zip_code": request.form['zipcode'],
             "dob": request.form['dob'],
             "password": request.form['pword'],
-            "pw_confirm": request.form['cword']
-            "file": request.form['file']
+            "pw_confirm": request.form['cword'],
+            "file": request.files['image']
         }
 
         reg = self.models['UserModel'].create_user(data)
