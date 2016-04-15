@@ -151,6 +151,7 @@ class News(Controller):
             'author_id': session['user_id'],
             'category': request.form['category'],
             'content': request.form['content']
+            'image': request.file['image']
         }
 
         data = {"info": session['user_id']}

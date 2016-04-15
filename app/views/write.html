@@ -66,7 +66,12 @@
    		<h3>What do you have to say about {{paper['city_name']}}, today?</h3>
    	</div>
    	<div id = 'form_area'>
-   		<form id = "/write_submit" method = "post">
+   		<form id = "/write_submit" method = "post" enctype="multipart/form-data">
+   		<div id = "image art">
+   			<p>Upload Image</p>
+   			<h7>Keep image close to 700x500 for the best results!</h7>
+   			<input type = "file" name = "image" accept = "image/*">
+   		</div>
    			<div id = "head">
 		   		Title: <input type = "text" name = "title"> 
 			   	<p>File To: </p>
