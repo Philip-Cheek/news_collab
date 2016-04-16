@@ -23,6 +23,13 @@ class NewsModel(Model):
             return {"results": True, "cities" : cities}
         else:
             return {"results": False, "city": cities[0]}
+
+        a_aquery = "SELECT * FROM articles WHERE name = %s"
+
+        a_queryish = "SELECT * FROM articles WHERE name SOUNDS LIKE %s"
+
+        u_query = "SELECT * FROM users WHERE name =%s"
+        u_queryish = "SELECT * FROM users WHERE name SOUNDS LIKE %s"
                 
     def render_articles (self, info):
         query = "SELECT articles.title as article_title, CONCAT(users.first_name,' ', users.last_name) as author_name, articles.created_at as date_created, articles.updated_at as edit_commit, CONCAT(editors.first_name,' ', editors.last_name) as editor_name FROM articles JOIN users ON articles.author_id = users.id LEFT JOIN edits on edits.article_id = articles.id JOIN users as editors on editors.id = edits.user_id WHERE articles.paper_id = %s ORDER BY date_created DESC LIMIT 75"
